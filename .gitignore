@@ -1,0 +1,8 @@
+/build/
+/dist/
+/occlusion_detection/datas/*
+*.mp4
+/reference.exe
+/.idea/
+/camera_side/.idea/
+

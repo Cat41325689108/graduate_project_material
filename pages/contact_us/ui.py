@@ -18,79 +18,39 @@ import pages.login.logic as logic
 
 
 class MyWidget(QWidget):
-    def __init__(self, mode=0):
+    def __init__(self):
         super().__init__()
+
         self.right_bar_widget1 = QtWidgets.QWidget()  # 右侧顶部搜索框部件
         self.right_message_Alter = QMessageBox()
         self.right_bar_layout1 = QtWidgets.QGridLayout()
         self.formLayout2 = QtWidgets.QGridLayout()
         self.right_bar_widget1.setLayout(self.right_bar_layout1)
 
-        self.user9 = QtWidgets.QLabel("关于与帮助")
-        self.user9.setFont(qtawesome.font('fa', 30))
-        self.right_bar_layout1.addWidget(self.user9, 0, 1, 2, 4)
-        self.user = QtWidgets.QPushButton(qtawesome.icon('fa.question-circle-o', color="black"), "使用帮助")
+        self.user = QtWidgets.QPushButton("使用帮助")
         self.user.setFont(qtawesome.font('fa', 22))
         self.right_bar_layout1.addWidget(self.user, 8, 3, 1, 4)
         self.user.clicked.connect(self.right_folder_button_clicked3)
-        self.user.setStyleSheet(
-            "QPushButton{color:highlight}"
-            "QPushButton:hover{color:white}"
-            "QPushButton{background-color:rgb(0,191,255)}"
-            "QPushButton{border:2px}"
-            "QPushButton{border-radius:10px}"
-            "QPushButton{padding:5px 6px}"
-            "QPushButton{font-size:14pt}")
-        self.user1 = QtWidgets.QPushButton(qtawesome.icon('fa.envelope-open-o', color="black"), "反馈问题")
+
+        self.user1 = QtWidgets.QPushButton("反馈问题")
         self.user1.setFont(qtawesome.font('fa', 22))
         self.right_bar_layout1.addWidget(self.user1, 9, 3, 1, 4)
         self.user1.clicked.connect(self.right_folder_button_clicked4)
-        self.user1.setStyleSheet(
-            "QPushButton{color:highlight}"
-            "QPushButton:hover{color:white}"
-            "QPushButton{background-color:rgb(0,191,255)}"
-            "QPushButton{border:2px}"
-            "QPushButton{border-radius:10px}"
-            "QPushButton{padding:5px 6px}"
-            "QPushButton{font-size:14pt}")
-        self.user2 = QtWidgets.QPushButton(qtawesome.icon('fa.internet-explorer', color="black"), "学校官网")
+        self.user2 = QtWidgets.QPushButton("学校官网")
         self.user2.setFont(qtawesome.font('fa', 22))
         self.right_bar_layout1.addWidget(self.user2, 10, 3, 1, 4)
         self.user2.clicked.connect(self.right_folder_button_clicked5)
-        self.user2.setStyleSheet(
-            "QPushButton{color:highlight}"
-            "QPushButton:hover{color:white}"
-            "QPushButton{background-color:rgb(0,191,255)}"
-            "QPushButton{border:2px}"
-            "QPushButton{border-radius:10px}"
-            "QPushButton{padding:5px 6px}"
-            "QPushButton{font-size:14pt}")
-        self.user3 = QtWidgets.QPushButton(qtawesome.icon('fa.users', color="black"), "主创人员")
+
+        self.user3 = QtWidgets.QPushButton("主创人员")
         self.user3.setFont(qtawesome.font('fa', 22))
         self.right_bar_layout1.addWidget(self.user3, 11, 3, 1, 4)
         self.user3.clicked.connect(self.right_folder_button_clicked6)
-        self.user3.setStyleSheet(
-            "QPushButton{color:highlight}"
-            "QPushButton:hover{color:white}"
-            "QPushButton{background-color:rgb(0,191,255)}"
-            "QPushButton{border:2px}"
-            "QPushButton{border-radius:10px}"
-            "QPushButton{padding:5px 6px}"
-            "QPushButton{font-size:14pt}")
         self.formLayout2.addWidget(self.right_bar_widget1, 0, 0, 1, 5)
-        self.recommend_button_1 = QtWidgets.QToolButton()
-        self.recommend_button_1.setIcon(QtGui.QIcon('./1.png'))
-        self.recommend_button_1.setIconSize(QtCore.QSize(1000, 1000))
+        self.recommend_button_1 = QtWidgets.QLabel()
+        self.recommend_button_1.setObjectName('QL')
+        self.recommend_button_1.setStyleSheet("#QL{background-color: transparent;}")
         self.right_bar_layout1.addWidget(self.recommend_button_1, 2, 1, 6, 8)
-        self.recommend_button_1.setStyleSheet('''
-                                                 QToolButton{border:none;color:black;}
-                                                 QToolButton:hover{color:white}
-                                                  ''')
-        # self.right_bar_widget2 = QtWidgets.QWidget()  # 右侧顶部搜索框部件
-        # self.right_bar_layout2 = QtWidgets.QGridLayout()  # 右侧顶部搜索框网格布局
-        # self.right_bar_widget2.setLayout(self.right_bar_layout2)
 
-        # self.formLayout2.addWidget(self.right_bar_widget2, 1, 0, 1, 9)
         self.setLayout(self.formLayout2)
 
     def right_folder_button_clicked3(self):
@@ -118,6 +78,6 @@ class MyWidget(QWidget):
 
     def right_folder_button_clicked6(self):
         self.right_message_Alter.information(self.right_message_Alter, "主创人员", self.tr(
-        '''
-        该程序的主创人员为：黄延滨 QQ：940388127
-        '''))
+            '''
+            该程序的主创人员为：黄延滨 QQ：940388127
+            '''))

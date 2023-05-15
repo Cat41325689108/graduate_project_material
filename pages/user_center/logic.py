@@ -8,11 +8,17 @@ import database
 from pages.mainWindow.ui import MainUi
 from pages.signup.ui import Signup
 
+
+# import database
+# import pages.mainView.ui as MainView
+
 def bind(self):
     database.check_appdatas()
 
     self.pushButton_enter.clicked.connect(lambda: on_pushButton_enter_clicked(self))
+    self.left_close.clicked.connect(self.close)
     self.pushButton_quit1.clicked.connect(lambda: on_pushButton_enter_clicked1(self))
+    self.left_mini.clicked.connect(self.showMinimized)
     init_login_info(self)
 
     self.timer = QTimer(self)
@@ -28,31 +34,20 @@ def goto_autologin(self):
 
 
 def on_pushButton_enter_clicked(self):
-    account_dict = {}
-    f = open("1.txt", 'r+')
-    for line in f:
-        (keys, value) = line.strip().split()
-        account_dict[keys] = value
+    # 账号判断
     account1 = self.lineEdit_account.text()
     password1 = self.lineEdit_password.text()
-    account_keys = list(account_dict.keys())
-    if account1 != "" and password1 != "":
 
-        if account1 not in account_keys:
-            reply1 = QMessageBox.information(self, '登录出错', '用户不存在', QMessageBox.Yes | QMessageBox.No,
-                                             QMessageBox.Yes)
-        elif password1 == account_dict[account1]:
-            ####### 保存登录信息
-            save_login_info(self)
-            # 通过验证，关闭对话框并返回1
-            self.close()
-            save_login_info(self)
-            self.mainWindow=MainUi()
-            self.mainWindow.show()
-        else:
-            QMessageBox.information(self, '登录出错', '密码错误', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-    else:
-        QMessageBox.information(self, '错误', '输入不能为空！', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+    if database.check_password(account1, password1) == 0:
+        reply1 = QMessageBox.information(self, '登录出错', '用户不存在或密码错误', QMessageBox.Yes | QMessageBox.No,
+                                         QMessageBox.Yes)
+        return
+
+    save_login_info(self)
+    self.mainWindow = MainUi()
+
+    self.close()
+    self.mainWindow.show()
 
 
 def on_pushButton_enter_clicked1(self):
@@ -85,3 +80,7 @@ def init_login_info(self):
 
     if the_autologin == "true" or the_autologin == True:
         self.checkBox_autologin.setChecked(True)
+
+
+regexp = QtCore.QRegExp('^[a-zA-Z0-9]*$')
+validator = QtGui.QRegExpValidator(regexp)
